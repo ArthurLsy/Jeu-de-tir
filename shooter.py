@@ -15,6 +15,7 @@ def process_mouse_event(world):
    
 
 def manage_events(world) -> bool:
+    trigger = 0
     stop = False
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -23,21 +24,26 @@ def manage_events(world) -> bool:
             process_mouse_event(world)
         if event.type == pygame.KEYUP:
             constants.ACCELERATION=0
-            while constants.ENERGY < 100 and event.type == pygame.KEYUP:
-                constants.ENERGY += constants.ENERGY_RATIO
     if(pygame.time.get_ticks() > constants.TIME_TO_PLAY):
         stop = True
     if pygame.key.get_pressed()[pygame.K_t]:
         #info_cible()
         print(pygame.key.get_pressed()[pygame.K_SPACE])
     if pygame.key.get_pressed()[pygame.K_RIGHT]:
+        trigger = 1
         move(targets,'r')
     if pygame.key.get_pressed()[pygame.K_LEFT]:
+        trigger = 1
         move(targets,'l')
     if pygame.key.get_pressed()[pygame.K_UP]:
+        trigger = 1
         move(targets,'u')
     if pygame.key.get_pressed()[pygame.K_DOWN]:
+        trigger = 1
         move(targets,'d')
+    if constants.ENERGY < 100 and trigger == 0:
+        constants.ENERGY += constants.ENERGY_RATIO
+        print(constants.ENERGY)
 
     return stop
 
