@@ -223,6 +223,11 @@ def update_display(scene, world, targets):
             constants.HEIGHT + (constants.TEXT_ZONE_HEIGHT - constants.FONT_HEIGHT) / 2
         )
     )
+    pygame.draw.rect(
+        scene,
+        (255,255,0),
+        (0,constants.HEIGHT-10,constants.ENERGY*(constants.WIDTH/100),10)
+    )
     pygame.display.flip()
 
 
